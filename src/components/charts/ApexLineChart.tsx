@@ -1,32 +1,67 @@
 import { useState } from "react";
 import ApexChart from "react-apexcharts";
 
-export default function ApexLineChart() {
+interface LineChartProps {
+  type: "line";
+}
+
+export default function ApexLineChart({ type }: LineChartProps) {
   const [chartSeries, setChartSeries] = useState([
     {
       name: "Sales",
-      data: [30, 40, 35, 50, 49, 60, 70, 20],
+      data: [30, 40, 35, 50, 49, 60, 70, 60, 90],
     },
   ]);
 
   return (
     <div
       style={{
-        flex: 1,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
       }}
     >
       <ApexChart
         series={chartSeries}
-        type="line"
+        type={type}
+        // width={300}
+        height={200}
         options={{
           chart: {
+            // offsetY: 10,
+            // offsetX: 0,
             zoom: {
               enabled: true,
             },
-            // background:'green',
+            // stacked:true,
+            // background: "#ffa32d",
             toolbar: {
-              show: true,
+              show: false,
+              // offsetY: 10,
               // autoSelected:'zoom'
+              tools: {
+                download: true,
+                pan: false,
+                reset: false,
+                zoom: false,
+                zoomin: false,
+                zoomout: false,
+              },
+            },
+            animations: {
+              enabled: true,
+              easing: "easeout",
+              speed: 1000,
+              animateGradually: {
+                enabled: false,
+                delay: 150,
+              },
+              dynamicAnimation: {
+                enabled: true,
+                speed: 350,
+              },
             },
           },
           dataLabels: {
@@ -51,21 +86,26 @@ export default function ApexLineChart() {
           },
           stroke: {
             show: true,
-            colors: ["#3578f5"],
+            colors: ["#6295f4"],
             curve: "straight",
-            width: [3],
+            width: [2],
             dashArray: [0],
           },
           title: {
-            text: "ApexCharts LineChart",
+            text: "LineChart",
             align: "left",
             floating: true,
             // offsetY:10,
             // offsetX:10,
             style: {
-              fontFamily:'malgun' 
+              fontFamily: "malgun",
             },
             // margin:50
+          },
+          plotOptions: {
+            line:{
+              isSlopeChart:false
+            }
           },
           //   legend: {
           //     tooltipHoverFormatter: function (val, opts) {
@@ -89,23 +129,23 @@ export default function ApexLineChart() {
             },
           },
           xaxis: {
-            categories: [
-              "01 Jan",
-              "02 Jan",
-              "03 Jan",
-              "04 Jan",
-              "05 Jan",
-              "06 Jan",
-              "07 Jan",
-              "08 Jan",
-              "09 Jan",
-              "10 Jan",
-              "11 Jan",
-              "12 Jan",
-            ],
+            // categories: [
+            //   "01 Jan",
+            //   "02 Jan",
+            //   "03 Jan",
+            //   "04 Jan",
+            //   "05 Jan",
+            //   "06 Jan",
+            //   "07 Jan",
+            //   "08 Jan",
+            //   "09 Jan",
+            //   "10 Jan",
+            //   "11 Jan",
+            //   "12 Jan",
+            // ],
           },
           yaxis: {
-            tickAmount: 3,
+            tickAmount: 5,
           },
           tooltip: {
             y: [
@@ -133,14 +173,11 @@ export default function ApexLineChart() {
             ],
           },
           grid: {
-            // borderColor: "#e09797",
-            // column: {
-            //     colors: ['#0000ff','#00ff00', '#ff0000'],
-            //     opacity:5
-            // }
             padding: {
-              //   top: 10,
-              // bottom:10
+              top: 20,
+              // bottom: 0,
+              // left: 20,
+              // right: 20,
             },
           },
         }}
