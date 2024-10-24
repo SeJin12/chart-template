@@ -123,6 +123,13 @@ export default function ApexBarChart() {
             },
           },
           xaxis: {
+            // floating:true,
+            axisBorder: {
+              show:true
+            },
+            labels:{
+              show:false
+            },
             categories: [
               "01 Jan",
               "02 Jan",
